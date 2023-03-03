@@ -1,10 +1,12 @@
 import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
-import userReducer from "../features/users/usersSlice";
+import { userApi } from "features/users/usersApi";
 
 const makeStore = () =>
   configureStore({
-    reducer: { users: userReducer },
+    reducer: { [userApi.reducerPath]: userApi.reducer },
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(userApi.middleware),
   });
 
 export type AppStore = ReturnType<typeof makeStore>;

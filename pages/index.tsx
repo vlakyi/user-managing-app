@@ -1,48 +1,39 @@
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
 import Head from "next/head";
 
-import { selectUserState } from "features/users/usersSlice";
+import {
+  getRunningQueriesThunk,
+  getUserList,
+  useGetUserListQuery,
+} from "features/users/usersApi";
 import { useMockBrowserWorker } from "mocks/useMockBrowserWorker";
 
 import type { NextPage } from "next";
-import type { User } from "mocks/db";
+import { wrapper } from "store";
 
-export const getServerSideProps = async () => {
-  const { server } = await import("../mocks/server");
-  server.listen();
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async () => {
+    const { server } = await import("../mocks/server");
+    server.listen();
 
-  const res = await fetch("https://api/users");
-  const users = await res.json();
+    store.dispatch(getUserList.initiate({}));
 
-  return {
-    props: {
-      users,
-    },
-  };
-};
+    await Promise.all(store.dispatch(getRunningQueriesThunk()));
 
-interface HomeProps {
-  users: User[];
-}
+    return {
+      props: {},
+    };
+  }
+);
 
-const Home: NextPage = ({ users }: HomeProps) => {
-  const countValue = useSelector(selectUserState);
+const Home: NextPage = () => {
   const { shouldRender } = useMockBrowserWorker();
+  const { data, error, isLoading } = useGetUserListQuery(
+    {},
+    { skip: !shouldRender }
+  );
 
-  useEffect(() => {
-    if (!shouldRender) return;
+  console.log({ data, error, isLoading });
 
-    async function fetchUsers() {
-      const res = await fetch("https://api/users");
-      const json = await res.json();
-      console.log({ json });
-    }
-
-    fetchUsers();
-  }, [shouldRender]);
-
-  console.log({ countValue, users });
   return (
     <div>
       <Head>
