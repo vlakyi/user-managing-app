@@ -1,5 +1,3 @@
-import Head from "next/head";
-
 import {
   getRunningQueriesThunk,
   getUserList,
@@ -34,15 +32,7 @@ const Home: NextPage = () => {
 
   console.log({ data, error, isLoading });
 
-  return (
-    <div>
-      <Head>
-        <title>User Managing App</title>
-        <meta name="description" content="Next.js User Managing App" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-    </div>
-  );
+  return <div></div>;
 };
 
 export default Home;

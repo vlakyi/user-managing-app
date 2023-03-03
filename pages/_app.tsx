@@ -1,20 +1,31 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { Roboto } from "next/font/google";
+import Head from "next/head";
 
 import { Provider } from "react-redux";
-import { Layout } from "components/Layout";
-import { ToastContainer } from "react-toastify";
 import { wrapper } from "store";
+import { ToastContainer } from "react-toastify";
+
+import { Layout } from "components/Layout";
 
 const roboto = Roboto({ weight: ["400", "500", "700"], subsets: ["latin"] });
 
 function MyApp({ Component, ...rest }: AppProps) {
   const { store, props } = wrapper.useWrappedStore(rest);
+
   return (
-    <Provider store={store}>
+    <>
+      <Head>
+        <title>User Managing App</title>
+        <meta name="description" content="Next.js User Managing App" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
       <Layout className={roboto.className}>
-        <Component {...props.pageProps} />
+        <Provider store={store}>
+          <Component {...props.pageProps} />
+        </Provider>
       </Layout>
 
       <ToastContainer
@@ -28,7 +39,7 @@ function MyApp({ Component, ...rest }: AppProps) {
         draggable
         pauseOnHover
       />
-    </Provider>
+    </>
   );
 }
 
