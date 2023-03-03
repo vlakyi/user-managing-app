@@ -14,7 +14,9 @@
   "dependencies": {
     "@next/font": "^13.2.3",
     "@reduxjs/toolkit": "^1.9.3",
+    "babel-preset-next": "^1.4.0",
     "next": "13.2.3",
+    "next-redux-wrapper": "^8.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-redux": "^8.0.5",
