@@ -1,5 +1,5 @@
 import { AnyAction, PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { AppState } from "app/store";
+import { AppState } from "store";
 import { HYDRATE } from "next-redux-wrapper";
 
 interface UsersState {

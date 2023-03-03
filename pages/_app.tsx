@@ -1,11 +1,12 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
+import { Roboto } from "next/font/google";
 
-import { Roboto } from "@next/font/google";
+import { Provider } from "react-redux";
 import { Layout } from "components/Layout";
 import { ToastContainer } from "react-toastify";
-import { wrapper } from "app/store";
-import { Provider } from "react-redux";
+import { wrapper } from "store";
+
 const roboto = Roboto({ weight: ["400", "500", "700"], subsets: ["latin"] });
 
 function MyApp({ Component, ...rest }: AppProps) {
