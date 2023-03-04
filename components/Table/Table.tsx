@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { TColumn, TDataWithId } from "./Table.types";
+import { useEffect, useMemo } from "react";
+import { TColumn, TDataWithId, TableProps } from "./Table.types";
 import {
   StyledTable,
   StyledTableCell,
@@ -8,26 +8,34 @@ import {
   StyledTableRow,
 } from "./Table.styled";
 
-interface TableProps<TData> {
-  data?: TData[];
-  columns: TColumn<TData>[];
-}
+import { getColumnAccessor, sortData, validateProps } from "./Table.utils";
 
 // in production I would use Tanstack Table instead
-export function Table<T extends TDataWithId>({
-  data = [],
-  columns,
-}: TableProps<T>) {
+export function Table<T extends TDataWithId>(props: TableProps<T>) {
+  const { data = [], columns, toggleSort, sortOrder } = props;
+
   useEffect(() => {
-    validateColumns(columns);
-  }, [columns]);
+    validateProps({ columns, toggleSort, sortOrder });
+  }, [columns, sortOrder, toggleSort]);
+
+  const sortedData = useMemo(() => {
+    if (!sortOrder) {
+      return data;
+    }
+
+    return sortData<T>(data, sortOrder);
+  }, [data, sortOrder]);
 
   return (
     <StyledTable>
       <StyledTableHead>
         <StyledTableRow>
           {columns.map((column) => (
-            <StyledTableHeaderCell key={column.id}>
+            <StyledTableHeaderCell
+              key={column.id}
+              $isSortable={column.sortable}
+              onClick={() => toggleSort && toggleSort(column)}
+            >
               {column.header}
             </StyledTableHeaderCell>
           ))}
@@ -35,7 +43,7 @@ export function Table<T extends TDataWithId>({
       </StyledTableHead>
 
       <tbody>
-        {data.map((row) => (
+        {sortedData.map((row) => (
           <StyledTableRow key={row.id}>
             {columns.map((column) => (
               <StyledTableCell key={`${row.id}_${column.id}`}>
@@ -47,21 +55,4 @@ export function Table<T extends TDataWithId>({
       </tbody>
     </StyledTable>
   );
-}
-
-function validateColumns(columns: TColumn<any>[]) {
-  const columnIds = columns.map((column) => column.id);
-  const columnIdsSet = new Set(columnIds);
-
-  if (columnIds.length !== columnIdsSet.size) {
-    throw new Error("Column ids must be unique");
-  }
-}
-
-function getColumnAccessor<T>(row: T, column: TColumn<T>) {
-  if (!column.accessor) {
-    return row[column.id];
-  }
-
-  return column.accessor(row);
 }

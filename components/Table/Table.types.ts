@@ -1,11 +1,21 @@
+import { TableState } from "features/userTable/userTableSlice";
+
 interface TColumn<T> {
   id: string;
   header: React.ReactNode;
   accessor?: (row: T) => React.ReactNode;
+  sortable?: boolean;
 }
 
 interface TDataWithId {
   id: string;
 }
 
-export type { TColumn, TDataWithId };
+interface TableProps<TData> {
+  data?: TData[];
+  columns: TColumn<TData>[];
+  toggleSort?: (column: TColumn<TData>) => void;
+  sortOrder?: TableState<TData>;
+}
+
+export type { TColumn, TDataWithId, TableProps };

@@ -1,4 +1,5 @@
 import { TColumn, Table } from "components/Table";
+import { changeSortOrder } from "features/userTable/userTableSlice";
 
 import {
   getRunningQueriesThunk,
@@ -9,7 +10,9 @@ import { User } from "mocks/db";
 import { useMockBrowserWorker } from "mocks/useMockBrowserWorker";
 
 import type { NextPage } from "next";
+import { useDispatch } from "react-redux";
 import { wrapper } from "store";
+import { useAppSelector } from "store/hooks";
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async () => {
@@ -35,9 +38,19 @@ const Home: NextPage = () => {
     }
   );
 
+  const dispatch = useDispatch();
+  const sortOnClick = (column: TColumn<User>) => {
+    if (!column.sortable) {
+      return;
+    }
+
+    dispatch(changeSortOrder(column.id as keyof User));
+  };
+
+  const sortOrder = useAppSelector((state) => state.userTable);
+
   console.log({ data, error, isLoading });
 
-  // could be memoized with useMemo
   const columns: TColumn<User>[] = [
     {
       id: "id",
@@ -50,6 +63,7 @@ const Home: NextPage = () => {
     {
       id: "userName",
       header: "Username",
+      sortable: true,
     },
     {
       id: "email",
@@ -63,7 +77,12 @@ const Home: NextPage = () => {
 
   return (
     <div>
-      <Table columns={columns} data={data?.users} />
+      <Table
+        columns={columns}
+        data={data?.users}
+        toggleSort={sortOnClick}
+        sortOrder={sortOrder}
+      />
     </div>
   );
 };

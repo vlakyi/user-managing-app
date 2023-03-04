@@ -17,7 +17,12 @@ export const StyledTableCell = styled.td`
   padding: 1rem;
 `;
 
-export const StyledTableHeaderCell = styled.th`
+interface StyledTableHeaderCellProps {
+  $isSortable?: boolean;
+}
+
+export const StyledTableHeaderCell = styled.th<StyledTableHeaderCellProps>`
   padding: 1rem;
   text-align: left;
+  cursor: ${({ $isSortable }) => ($isSortable ? "pointer" : "default")};
 `;

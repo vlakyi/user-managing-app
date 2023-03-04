@@ -1,10 +1,14 @@
 import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
 import { userApi } from "features/users/usersApi";
+import userTableSlice from "features/userTable/userTableSlice";
 
 const makeStore = () =>
   configureStore({
-    reducer: { [userApi.reducerPath]: userApi.reducer },
+    reducer: {
+      [userApi.reducerPath]: userApi.reducer,
+      userTable: userTableSlice,
+    },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(userApi.middleware),
   });
@@ -17,5 +21,8 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   Action
 >;
+
+export type AppDispatch = ReturnType<typeof makeStore>["dispatch"];
+export type RootState = ReturnType<ReturnType<typeof makeStore>["getState"]>;
 
 export const wrapper = createWrapper<AppStore>(makeStore);
