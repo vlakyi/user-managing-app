@@ -4,14 +4,9 @@ import { TColumn, Table } from "components/Table";
 import { Button } from "components/Button";
 
 import { TableState } from "features/userTable/userTableSlice";
-import {
-  StyledUserListContainer,
-  StyledUserListHeader,
-  StyledUserListHeaderContainer,
-  StyledUserListTableContainer,
-} from "./UserList.styled";
-import Link from "next/link";
+
 import { useRouter } from "next/router";
+import { Card } from "components/Card";
 
 interface UserListProps {
   users: User[];
@@ -20,7 +15,7 @@ interface UserListProps {
 }
 
 export function UserList({ users = [], sortOrder, toggleSort }: UserListProps) {
-  const { replace } = useRouter();
+  const { push } = useRouter();
 
   const columns: TColumn<User>[] = useMemo(
     () => [
@@ -50,20 +45,20 @@ export function UserList({ users = [], sortOrder, toggleSort }: UserListProps) {
   );
 
   return (
-    <StyledUserListContainer>
-      <StyledUserListHeaderContainer>
-        <StyledUserListHeader>User List</StyledUserListHeader>
-        <Button onClick={() => replace("./add")}>Add new</Button>
-      </StyledUserListHeaderContainer>
+    <Card>
+      <Card.Header>
+        <h1>User List</h1>
+        <Button onClick={() => push("./add")}>Add new</Button>
+      </Card.Header>
 
-      <StyledUserListTableContainer>
+      <Card.Content>
         <Table
           columns={columns}
           data={users}
           toggleSort={toggleSort}
           sortOrder={sortOrder}
         />
-      </StyledUserListTableContainer>
-    </StyledUserListContainer>
+      </Card.Content>
+    </Card>
   );
 }
