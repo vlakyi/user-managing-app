@@ -17,7 +17,7 @@ import { useMockBrowserWorker } from "mocks/useMockBrowserWorker";
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async () => {
-    const { server } = await import("../mocks/server");
+    const { server } = await import("../../mocks/server");
     server.listen();
 
     store.dispatch(getUserList.initiate({}));
