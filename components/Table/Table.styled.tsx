@@ -10,7 +10,7 @@ export const StyledTableRow = styled.tr`
 `;
 
 export const StyledTableHead = styled.thead`
-  background-color: lightgray;
+  background-color: ${({ theme }) => theme.neutral.main};
 `;
 
 export const StyledTableCell = styled.td`

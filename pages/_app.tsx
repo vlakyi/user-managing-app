@@ -8,6 +8,8 @@ import { wrapper } from "store";
 import { ToastContainer } from "react-toastify";
 
 import { Layout } from "components/Layout";
+import { ThemeProvider } from "styled-components";
+import { theme } from "styles/theme";
 
 const roboto = Roboto({ weight: ["400", "500", "700"], subsets: ["latin"] });
 
@@ -22,11 +24,13 @@ function MyApp({ Component, ...rest }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Layout className={roboto.className}>
-        <Provider store={store}>
-          <Component {...props.pageProps} />
-        </Provider>
-      </Layout>
+      <ThemeProvider theme={theme}>
+        <Layout className={roboto.className}>
+          <Provider store={store}>
+            <Component {...props.pageProps} />
+          </Provider>
+        </Layout>
+      </ThemeProvider>
 
       <ToastContainer
         position="top-center"
