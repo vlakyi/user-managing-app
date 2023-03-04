@@ -14,10 +14,12 @@ export const db = factory({
   },
 });
 
+let id = 0;
+
 // Generate 10 users
 [...Array(10)].fill(null).forEach(() =>
   db.user.create({
-    id: faker.datatype.uuid(),
+    id: String(id++), // could be uuid instead
     name: faker.name.fullName(),
     userName: faker.internet.userName(),
     city: faker.address.city(),

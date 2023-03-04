@@ -1,5 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { User } from "mocks/db";
 import { HYDRATE } from "next-redux-wrapper";
+
+interface GetUserListResponse {
+  users: User[];
+}
 
 export const userApi = createApi({
   reducerPath: "usersSlice",
@@ -10,7 +15,7 @@ export const userApi = createApi({
     }
   },
   endpoints: (builder) => ({
-    getUserList: builder.query({
+    getUserList: builder.query<GetUserListResponse, {}>({
       query: () => `/getUsers`,
     }),
   }),
