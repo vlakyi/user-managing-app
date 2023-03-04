@@ -1,4 +1,3 @@
-// src/mocks/db.js
 import { faker } from "@faker-js/faker";
 import { factory, primaryKey } from "@mswjs/data";
 

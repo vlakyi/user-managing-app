@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { User } from "mocks/db";
+import { User } from "mocks";
 import { HYDRATE } from "next-redux-wrapper";
 
 interface GetUserListResponse {

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { User } from "mocks/db";
+import { User } from "mocks";
 
 type SortDirection = "asc" | "desc";
 type SortField = keyof User;

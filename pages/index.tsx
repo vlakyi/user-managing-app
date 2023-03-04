@@ -1,18 +1,19 @@
+import { useMemo } from "react";
+import type { NextPage } from "next";
+import { useDispatch } from "react-redux";
+import { wrapper } from "store";
+import { useAppSelector } from "store/hooks";
+
 import { TColumn, Table } from "components/Table";
 import { changeSortOrder } from "features/userTable/userTableSlice";
-
 import {
   getRunningQueriesThunk,
   getUserList,
   useGetUserListQuery,
 } from "features/users/usersApi";
-import { User } from "mocks/db";
-import { useMockBrowserWorker } from "mocks/useMockBrowserWorker";
 
-import type { NextPage } from "next";
-import { useDispatch } from "react-redux";
-import { wrapper } from "store";
-import { useAppSelector } from "store/hooks";
+import { User } from "mocks";
+import { useMockBrowserWorker } from "mocks/useMockBrowserWorker";
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async () => {
@@ -51,29 +52,32 @@ const Home: NextPage = () => {
 
   console.log({ data, error, isLoading });
 
-  const columns: TColumn<User>[] = [
-    {
-      id: "id",
-      header: "Id",
-    },
-    {
-      id: "name",
-      header: "Name",
-    },
-    {
-      id: "userName",
-      header: "Username",
-      sortable: true,
-    },
-    {
-      id: "email",
-      header: "Email",
-    },
-    {
-      id: "city",
-      header: "City",
-    },
-  ];
+  const columns: TColumn<User>[] = useMemo(
+    () => [
+      {
+        id: "id",
+        header: "Id",
+      },
+      {
+        id: "name",
+        header: "Name",
+      },
+      {
+        id: "userName",
+        header: "Username",
+        sortable: true,
+      },
+      {
+        id: "email",
+        header: "Email",
+      },
+      {
+        id: "city",
+        header: "City",
+      },
+    ],
+    []
+  );
 
   return (
     <div>
