@@ -5,7 +5,7 @@ interface StyledCardWithStyleOverrideProps {
 }
 
 export const StyledCardContainer = styled.div<StyledCardWithStyleOverrideProps>`
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   box-shadow: ${({ theme }) => theme.shadow.main};
   min-width: ${({ $minWidth }) => $minWidth || "unset"};
   max-width: 100%;
