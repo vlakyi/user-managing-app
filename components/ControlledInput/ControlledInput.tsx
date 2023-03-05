@@ -1,7 +1,10 @@
 import { Path, useFormContext } from "react-hook-form";
 import { StyledErrorMessage, StyledLabel } from "../UserForm/UserForm.styled";
+import { StyledControlledInput } from "./ControlledInput.styled";
 
-interface ControlledInputProps<T> extends React.HTMLProps<HTMLInputElement> {
+// Omit to fix TS error in styled components
+interface ControlledInputProps<T>
+  extends Omit<React.HTMLProps<HTMLInputElement>, "as"> {
   label: string;
   fieldName: Path<T>;
 }
@@ -17,7 +20,7 @@ export function ControlledInput<T>(props: ControlledInputProps<T>) {
   return (
     <StyledLabel>
       {label}
-      <input type="text" {...rest} {...register(fieldName)} />
+      <StyledControlledInput type="text" {...rest} {...register(fieldName)} />
       <StyledErrorMessage>{message}</StyledErrorMessage>
     </StyledLabel>
   );
