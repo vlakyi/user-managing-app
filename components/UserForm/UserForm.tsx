@@ -1,46 +1,28 @@
+import { useRouter } from "next/router";
 import { UserInput } from "mocks";
 import { FormProvider, useForm } from "react-hook-form";
 import { StyledUserForm } from "./UserForm.styled";
-import { ButtonGroup, Button } from "components/Button";
-import { useRouter } from "next/router";
 
-import { IsEmail, Length } from "class-validator";
 import { classValidatorResolver } from "@hookform/resolvers/class-validator";
+import { ButtonGroup, Button } from "components/Button";
 import { ControlledInput } from "components/ControlledInput.tsx";
+import { MSWClientGuard } from "mocks/MSWClientGuard";
+import { UserResolver } from "schema/UserResolver";
 
 interface UserFormProps {
   defaultValues?: UserInput;
-}
-
-// can be used in a shared library on frontend and backend
-class UserResolver implements UserInput {
-  @Length(2, 30)
-  userName: string;
-
-  @IsEmail({}, { message: "invalid email" })
-  email: string;
-
-  @Length(2, 30)
-  city: string;
-
-  @Length(2, 30)
-  name: string;
+  onSubmit: (data: UserInput) => void;
 }
 
 const resolver = classValidatorResolver(UserResolver);
 
-export function UserForm({ defaultValues }: UserFormProps) {
+export function UserForm({ defaultValues, onSubmit }: UserFormProps) {
   const { push } = useRouter();
   const methods = useForm<UserInput>({ resolver, defaultValues });
   const {
     handleSubmit,
     formState: { errors },
   } = methods;
-  console.log({ errors });
-
-  const onSubmit = (data: UserInput) => {
-    console.log(data);
-  };
 
   return (
     <FormProvider {...methods}>
@@ -55,13 +37,19 @@ export function UserForm({ defaultValues }: UserFormProps) {
         <ControlledInput<UserInput> label="City" fieldName="city" />
       </StyledUserForm>
 
-      <ButtonGroup>
-        <Button variant="outlined" color="danger" onClick={() => push("/home")}>
-          Cancel
-        </Button>
+      <MSWClientGuard>
+        <ButtonGroup>
+          <Button
+            variant="outlined"
+            color="danger"
+            onClick={() => push("/home")}
+          >
+            Cancel
+          </Button>
 
-        <Button onClick={handleSubmit(onSubmit)}>Submit</Button>
-      </ButtonGroup>
+          <Button onClick={handleSubmit(onSubmit)}>Submit</Button>
+        </ButtonGroup>
+      </MSWClientGuard>
     </FormProvider>
   );
 }
