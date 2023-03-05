@@ -55,9 +55,11 @@ const EditUser: NextPage = () => {
   }, [isError, error]);
 
   useEffect(() => {
-    if (data) {
+    if (data?.user) {
       push("/home");
-      toast("User edited successfully", { type: "success" });
+      toast(`User: ${data.user.userName} edited successfully`, {
+        type: "success",
+      });
     }
   }, [data, push]);
 

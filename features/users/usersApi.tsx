@@ -6,7 +6,7 @@ interface GetUserListResponse {
   users: User[];
 }
 
-interface GetUserByIdResponse {
+interface UserResponse {
   user: User;
 }
 
@@ -17,7 +17,8 @@ interface EditUserInput {
 
 export const userApi = createApi({
   reducerPath: "usersSlice",
-  tagTypes: ["Users"],
+  tagTypes: ["User"],
+  refetchOnMountOrArgChange: true,
   baseQuery: fetchBaseQuery({ baseUrl: "https://test-api.com/api/user" }),
   extractRehydrationInfo(action, { reducerPath }) {
     if (action.type === HYDRATE) {
@@ -27,34 +28,49 @@ export const userApi = createApi({
   endpoints: (builder) => ({
     getUserList: builder.query<GetUserListResponse, {}>({
       query: () => `/getUsers`,
+      providesTags: (result, error, arg) =>
+        result
+          ? [
+              ...result.users.map(({ id }) => ({ type: "User" as const, id })),
+              "User",
+            ]
+          : ["User"],
     }),
-    getUserById: builder.query<GetUserByIdResponse, string>({
+    getUserById: builder.query<UserResponse, string>({
       query: (id) => `/getUser/${id}`,
     }),
-    createUser: builder.mutation<User, UserInput>({
+    createUser: builder.mutation<UserResponse, UserInput>({
       query: (user) => ({
         url: `/create`,
         method: "POST",
         body: { user },
       }),
-      invalidatesTags: ["Users"],
+      invalidatesTags: ["User"],
     }),
-    editUser: builder.mutation<User, EditUserInput>({
+    editUser: builder.mutation<UserResponse, EditUserInput>({
       query: ({ id, user }) => ({
         url: `/edit/${id}`,
         method: "POST",
         body: { user },
       }),
-      invalidatesTags: ["Users"],
+      invalidatesTags: ["User"],
+    }),
+    deleteUser: builder.mutation<UserResponse, string>({
+      query: (id) => ({
+        url: `/delete/${id}`,
+        method: "POST",
+      }),
+      invalidatesTags: (result, error, arg) => [{ type: "User", id: arg }],
     }),
   }),
 });
 
 export const {
   useGetUserListQuery,
+  useGetUserByIdQuery,
   useCreateUserMutation,
   useEditUserMutation,
-  useGetUserByIdQuery,
+  useDeleteUserMutation,
   util: { getRunningQueriesThunk },
 } = userApi;
 export const { getUserList, createUser, getUserById } = userApi.endpoints;

@@ -30,7 +30,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 );
 
 const Home: NextPage = () => {
-  const { data, error, isLoading } = useGetUserListQuery({});
+  const { data } = useGetUserListQuery({});
 
   const dispatch = useDispatch();
   const toggleSort = (column: TColumn<User>) => {

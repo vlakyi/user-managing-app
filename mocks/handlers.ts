@@ -40,13 +40,11 @@ export const handlers = [
       const { user } = req.body;
 
       const newUser = db.user.create({ id: generateUserId(), ...user });
-      const users = db.user.getAll();
 
       return res(
         ctx.status(200),
         ctx.json({
           user: newUser,
-          users,
         })
       );
     }
@@ -66,15 +64,32 @@ export const handlers = [
         },
         data: user,
       });
-      const users = db.user.getAll();
 
       return res(
         ctx.status(200),
         ctx.json({
           user: editedUser,
-          users,
         })
       );
     }
   ),
+
+  rest.post("https://test-api.com/api/user/delete/:id", (req, res, ctx) => {
+    const id = req.params.id as string;
+
+    const deletedUser = db.user.delete({
+      where: {
+        id: {
+          equals: id,
+        },
+      },
+    });
+
+    return res(
+      ctx.status(200),
+      ctx.json({
+        user: deletedUser,
+      })
+    );
+  }),
 ];

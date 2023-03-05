@@ -8,6 +8,7 @@ import { TableState } from "features/userTable/userTableSlice";
 import { useRouter } from "next/router";
 import { Card } from "components/Card";
 import { EditUserButton } from "./EditUserButton";
+import { DeleteUserButton } from "./DeleteUserButton";
 
 interface UserListProps {
   users: User[];
@@ -46,6 +47,11 @@ export function UserList({ users = [], sortOrder, toggleSort }: UserListProps) {
           id: "edit",
           header: "Edit",
           accessor: (user) => <EditUserButton userId={user.id} />,
+        },
+        {
+          id: "delete",
+          header: "Delete",
+          accessor: (user) => <DeleteUserButton userId={user.id} />,
         },
       ] satisfies TColumn<User>[],
     []

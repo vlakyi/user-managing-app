@@ -6,7 +6,6 @@ import { StyledUserForm } from "./UserForm.styled";
 import { classValidatorResolver } from "@hookform/resolvers/class-validator";
 import { ButtonGroup, Button } from "components/Button";
 import { ControlledInput } from "components/ControlledInput.tsx";
-import { MSWClientGuard } from "mocks/MSWClientGuard";
 import { UserResolver } from "schema/UserResolver";
 
 interface UserFormProps {
@@ -37,21 +36,15 @@ export function UserForm({ defaultValues, onSubmit }: UserFormProps) {
         <ControlledInput<UserInput> label="City" fieldName="city" />
       </StyledUserForm>
 
-      <MSWClientGuard>
-        <ButtonGroup>
-          <Button
-            variant="outlined"
-            color="danger"
-            onClick={() => push("/home")}
-          >
-            Cancel
-          </Button>
+      <ButtonGroup>
+        <Button variant="outlined" color="danger" onClick={() => push("/home")}>
+          Cancel
+        </Button>
 
-          <Button disabled={!isDirty} onClick={handleSubmit(onSubmit)}>
-            Submit
-          </Button>
-        </ButtonGroup>
-      </MSWClientGuard>
+        <Button disabled={!isDirty} onClick={handleSubmit(onSubmit)}>
+          Submit
+        </Button>
+      </ButtonGroup>
     </FormProvider>
   );
 }
