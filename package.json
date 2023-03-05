@@ -12,9 +12,12 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@hookform/resolvers": "^2.9.11",
     "@mswjs/data": "^0.11.2",
     "@reduxjs/toolkit": "^1.9.3",
     "babel-preset-next": "^1.4.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.0",
     "next": "13.2.3",
     "next-redux-wrapper": "^8.1.0",
     "react": "18.2.0",
