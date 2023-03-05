@@ -2,27 +2,31 @@ import { DefaultTheme } from "styled-components";
 
 const theme: DefaultTheme = {
   primary: {
-    main: "#1438a2",
-    dark: "#0f2c7a",
+    light: "hsla(225, 78%, 36%, 0.2)",
+    main: "hsl(225, 78%, 36%)",
+    dark: "hsl(225, 78%, 27%)",
   },
   secondary: {
-    main: "#d2a009",
-    dark: "#a67f00",
+    light: "hsla(45, 92%, 43%, 0.2)",
+    main: "hsl(45, 92%, 43%)",
+    dark: "hsl(45, 100%, 33%)",
   },
   danger: {
-    main: "#d0021b",
-    dark: "#a50018",
+    light: "hsla(353, 98%, 41%, 0.2)",
+    main: "hsl(353, 98%, 41%)",
+    dark: "hsl(351, 100%, 32%)",
   },
   neutral: {
-    main: "#c4c4c4",
-    dark: "#9c9c9c",
+    light: "hsla(0, 0%, 77%, 0.2)",
+    main: "hsl(0, 0%, 77%)",
+    dark: "hsl(0, 0%, 61%)",
   },
   shadow: {
-    main: "0 0 0.75rem 1px #9c9c9c",
+    main: "0 0 0.75rem 1px hsl(0, 0%, 61%)",
   },
   text: {
-    main: "#000000",
-    secondary: "#ffffff",
+    main: "hsl(0, 0%, 0%)",
+    secondary: "hsl(0, 0%, 100%)",
   },
 };
 
