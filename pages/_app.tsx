@@ -1,4 +1,6 @@
 import "../styles/globals.css";
+import "react-toastify/dist/ReactToastify.css";
+
 import type { AppProps } from "next/app";
 import { Roboto } from "next/font/google";
 import Head from "next/head";
