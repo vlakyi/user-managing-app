@@ -7,12 +7,12 @@ import {
 type BaseCardProps = React.HTMLAttributes<HTMLDivElement>;
 
 interface CardProps extends BaseCardProps {
-  maxWidth?: string;
+  minWidth?: string;
 }
 
-export function Card({ children, maxWidth, ...props }: CardProps) {
+export function Card({ children, minWidth, ...props }: CardProps) {
   return (
-    <StyledCardContainer $maxWidth={maxWidth} {...props}>
+    <StyledCardContainer $minWidth={minWidth} {...props}>
       {children}
     </StyledCardContainer>
   );

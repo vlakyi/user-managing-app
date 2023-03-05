@@ -25,7 +25,7 @@ const AddUser: NextPage = () => {
   }, [data, push]);
 
   return (
-    <Card maxWidth="300px">
+    <Card minWidth="300px">
       <Card.Header>
         <h1>Add User</h1>
       </Card.Header>
