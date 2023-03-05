@@ -26,12 +26,15 @@ let id = 0;
   })
 );
 
-interface User {
-  id: string;
+interface UserInput {
   name: string;
   userName: string;
   city: string;
   email: string;
 }
 
-export type { User };
+interface User extends UserInput {
+  id: string;
+}
+
+export type { User, UserInput };
