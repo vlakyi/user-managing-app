@@ -21,7 +21,7 @@ export function UserForm({ defaultValues, onSubmit }: UserFormProps) {
   const methods = useForm<UserInput>({ resolver, defaultValues });
   const {
     handleSubmit,
-    formState: { errors },
+    formState: { isDirty },
   } = methods;
 
   return (
@@ -47,7 +47,9 @@ export function UserForm({ defaultValues, onSubmit }: UserFormProps) {
             Cancel
           </Button>
 
-          <Button onClick={handleSubmit(onSubmit)}>Submit</Button>
+          <Button disabled={!isDirty} onClick={handleSubmit(onSubmit)}>
+            Submit
+          </Button>
         </ButtonGroup>
       </MSWClientGuard>
     </FormProvider>

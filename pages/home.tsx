@@ -13,7 +13,6 @@ import {
 } from "features/users/usersApi";
 
 import { User } from "mocks";
-import { useMockBrowserWorker } from "mocks/useMockBrowserWorker";
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async () => {
@@ -31,13 +30,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 );
 
 const Home: NextPage = () => {
-  const { shouldRender } = useMockBrowserWorker();
-  const { data, error, isLoading } = useGetUserListQuery(
-    {},
-    {
-      skip: !shouldRender,
-    }
-  );
+  const { data, error, isLoading } = useGetUserListQuery({});
 
   const dispatch = useDispatch();
   const toggleSort = (column: TColumn<User>) => {

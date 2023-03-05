@@ -10,7 +10,7 @@ export function EditUserButton({ userId }: EditUserButtonProps) {
   const { push } = useRouter();
 
   return (
-    <Button color="secondary" onClick={() => push(`/home/edit/${userId}`)}>
+    <Button color="secondary" onClick={() => push(`/edit/${userId}`)}>
       Edit
     </Button>
   );
