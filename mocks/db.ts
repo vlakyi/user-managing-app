@@ -39,4 +39,6 @@ export function generateUsers(count = 10) {
   );
 }
 
+generateUsers(5);
+
 export type { User, UserInput };
