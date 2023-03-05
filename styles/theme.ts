@@ -19,7 +19,7 @@ const theme: DefaultTheme = {
   neutral: {
     light: "hsla(0, 0%, 77%, 0.2)",
     main: "hsl(0, 0%, 77%)",
-    dark: "hsl(0, 0%, 61%)",
+    dark: "hsl(0, 0%, 45%)",
   },
   shadow: {
     main: "0 0 0.75rem 1px hsl(0, 0%, 61%)",

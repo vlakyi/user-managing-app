@@ -57,6 +57,11 @@ const StyledButton = styled.button<StyledButtonProps>`
   font-weight: 600;
 
   cursor: pointer;
+
+  &:disabled {
+    background-color: ${({ theme }) => theme.neutral.dark};
+    cursor: not-allowed;
+  }
 `;
 
 export const ButtonGroup = styled.div`
