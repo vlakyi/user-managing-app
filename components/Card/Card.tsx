@@ -4,20 +4,32 @@ import {
   StyledCardHeaderContainer,
 } from "./Card.styled";
 
-interface CardProps {
-  children: React.ReactNode;
+type BaseCardProps = React.HTMLAttributes<HTMLDivElement>;
+
+interface CardProps extends BaseCardProps {
+  maxWidth?: string;
 }
 
-export function Card({ children }: CardProps) {
-  return <StyledCardContainer>{children}</StyledCardContainer>;
+export function Card({ children, maxWidth, ...props }: CardProps) {
+  return (
+    <StyledCardContainer $maxWidth={maxWidth} {...props}>
+      {children}
+    </StyledCardContainer>
+  );
 }
 
-function CardHeader({ children }: CardProps) {
-  return <StyledCardHeaderContainer>{children}</StyledCardHeaderContainer>;
+function CardHeader({ children, ...props }: BaseCardProps) {
+  return (
+    <StyledCardHeaderContainer {...props}>{children}</StyledCardHeaderContainer>
+  );
 }
 
-function CardContent({ children }: CardProps) {
-  return <StyledCardContentContainer>{children}</StyledCardContentContainer>;
+function CardContent({ children, ...props }: BaseCardProps) {
+  return (
+    <StyledCardContentContainer {...props}>
+      {children}
+    </StyledCardContentContainer>
+  );
 }
 
 Card.Header = CardHeader;

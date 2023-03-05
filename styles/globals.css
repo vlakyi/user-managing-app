@@ -1,5 +1,17 @@
 @import "./reset.css";
 
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+#__next {
+  height: 100%;
+  width: 100%;
+}
+
 html,
 body {
   height: 100%;

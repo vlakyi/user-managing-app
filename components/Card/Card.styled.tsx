@@ -1,8 +1,14 @@
 import styled from "styled-components";
 
-export const StyledCardContainer = styled.div`
+interface StyledCardWithStyleOverrideProps {
+  $maxWidth?: string;
+}
+
+export const StyledCardContainer = styled.div<StyledCardWithStyleOverrideProps>`
   border-radius: 1rem;
   box-shadow: ${({ theme }) => theme.shadow.main};
+  max-width: ${({ $maxWidth }) => $maxWidth || "unset"};
+  width: 100%;
 `;
 
 export const StyledCardHeaderContainer = styled.header`
