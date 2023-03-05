@@ -5,7 +5,7 @@ import { StyledUserForm } from "./UserForm.styled";
 
 import { classValidatorResolver } from "@hookform/resolvers/class-validator";
 import { ButtonGroup, Button } from "components/Button";
-import { ControlledInput } from "components/ControlledInput.tsx";
+import { ControlledInput } from "components/ControlledInput";
 import { UserResolver } from "schema/UserResolver";
 
 interface UserFormProps {
