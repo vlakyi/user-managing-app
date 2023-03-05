@@ -3,7 +3,7 @@ import { factory, primaryKey } from "@mswjs/data";
 
 interface UserInput {
   name: string;
-  userName: string;
+  username: string;
   city: string;
   email: string;
 }
@@ -17,7 +17,7 @@ export const db = factory({
   user: {
     id: primaryKey(String),
     name: String,
-    userName: String,
+    username: String,
     city: String,
     email: String,
   },
@@ -32,7 +32,7 @@ export function generateUsers(count = 10) {
     db.user.create({
       id: generateUserId(), // could be uuid instead
       name: faker.name.fullName(),
-      userName: faker.internet.userName(),
+      username: faker.internet.userName(),
       city: faker.address.city(),
       email: faker.internet.email(),
     })

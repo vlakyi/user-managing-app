@@ -31,7 +31,7 @@ export function UserList({ users = [], sortOrder, toggleSort }: UserListProps) {
           header: "Name",
         },
         {
-          id: "userName",
+          id: "username",
           header: "Username",
           sortable: true,
         },

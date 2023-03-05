@@ -11,7 +11,7 @@ interface TableState<TData> {
 }
 
 const initialState: TableState<User> = {
-  sortField: "userName",
+  sortField: "username",
   direction: "asc",
 };
 

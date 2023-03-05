@@ -24,7 +24,7 @@ export function DeleteUserButton({ userId }: DeleteUserButtonProps) {
 
   useEffect(() => {
     if (data?.user) {
-      toast(`User: ${data.user.userName} deleted successfully`, {
+      toast(`User: ${data.user.username} deleted successfully`, {
         type: "success",
       });
     }

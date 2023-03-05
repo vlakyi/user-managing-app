@@ -27,7 +27,7 @@ export function UserForm({ defaultValues, onSubmit }: UserFormProps) {
     <FormProvider {...methods}>
       <StyledUserForm>
         <ControlledInput<UserInput> label="Name" fieldName="name" />
-        <ControlledInput<UserInput> label="Username" fieldName="userName" />
+        <ControlledInput<UserInput> label="Username" fieldName="username" />
         <ControlledInput<UserInput>
           label="Email"
           fieldName="email"

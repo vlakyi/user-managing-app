@@ -20,7 +20,7 @@ const AddUser: NextPage = () => {
   useEffect(() => {
     if (data?.user) {
       console.log({ data });
-      toast(`User: ${data.user.userName} created successfully`, {
+      toast(`User: ${data.user.username} created successfully`, {
         type: "success",
       });
       push("/home");
