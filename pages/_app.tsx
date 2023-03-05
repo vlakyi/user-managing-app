@@ -12,11 +12,13 @@ import { ToastContainer } from "react-toastify";
 import { Layout } from "components/Layout";
 import { ThemeProvider } from "styled-components";
 import { theme } from "styles/theme";
+import { useMockBrowserWorker } from "mocks/useMockBrowserWorker";
 
 const roboto = Roboto({ weight: ["400", "500", "700"], subsets: ["latin"] });
 
 function MyApp({ Component, ...rest }: AppProps) {
   const { store, props } = wrapper.useWrappedStore(rest);
+  const { shouldRender } = useMockBrowserWorker();
 
   return (
     <>
@@ -29,7 +31,7 @@ function MyApp({ Component, ...rest }: AppProps) {
       <ThemeProvider theme={theme}>
         <Layout className={roboto.className}>
           <Provider store={store}>
-            <Component {...props.pageProps} />
+            {shouldRender ? <Component {...props.pageProps} /> : null}
           </Provider>
         </Layout>
       </ThemeProvider>
