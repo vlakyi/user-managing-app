@@ -17,12 +17,18 @@ const theme: DefaultTheme = {
     dark: "hsl(351, 100%, 32%)",
   },
   neutral: {
-    light: "hsla(0, 0%, 77%, 0.2)",
-    main: "hsl(0, 0%, 77%)",
-    dark: "hsl(0, 0%, 45%)",
+    light: "hsla(0, 0%, 77%)",
+    main: "hsl(0, 0%, 45%)",
+    dark: "hsl(0, 0%, 35%)",
   },
   shadow: {
     main: "0 0 0.75rem 1px hsl(0, 0%, 61%)",
+  },
+  overlay: {
+    main: "hsla(0, 0%, 0%, 0.3)",
+  },
+  background: {
+    main: "hsl(0, 0%, 100%)",
   },
   text: {
     main: "hsl(0, 0%, 0%)",

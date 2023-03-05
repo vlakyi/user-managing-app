@@ -38,6 +38,8 @@ export const userApi = createApi({
     }),
     getUserById: builder.query<UserResponse, string>({
       query: (id) => `/getUser/${id}`,
+      providesTags: (result, error, arg) =>
+        result ? [{ type: "User", id: result.user.id }, "User"] : ["User"],
     }),
     createUser: builder.mutation<UserResponse, UserInput>({
       query: (user) => ({

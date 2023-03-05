@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes } from "react";
 import styled, { css } from "styled-components";
 
-type ButtonColor = "primary" | "secondary" | "danger";
+type ButtonColor = "primary" | "secondary" | "danger" | "neutral";
 type ButtonVariant = "contained" | "outlined";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

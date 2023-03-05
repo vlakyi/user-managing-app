@@ -13,6 +13,8 @@ declare module "styled-components" {
     danger: ColorVariants;
     neutral: ColorVariants;
     shadow: ColorVariants;
+    overlay: ColorVariants;
+    background: ColorVariants;
     text: ColorVariants;
   }
 }

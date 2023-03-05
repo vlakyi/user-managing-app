@@ -36,6 +36,8 @@ function MyApp({ Component, ...rest }: AppProps) {
         </Layout>
       </ThemeProvider>
 
+      <div id="dialog-root" />
+
       <ToastContainer
         position="top-center"
         autoClose={5000}

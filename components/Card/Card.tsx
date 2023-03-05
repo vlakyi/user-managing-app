@@ -18,13 +18,13 @@ export function Card({ children, minWidth, ...props }: CardProps) {
   );
 }
 
-function CardHeader({ children, ...props }: BaseCardProps) {
+export function CardHeader({ children, ...props }: BaseCardProps) {
   return (
     <StyledCardHeaderContainer {...props}>{children}</StyledCardHeaderContainer>
   );
 }
 
-function CardContent({ children, ...props }: BaseCardProps) {
+export function CardContent({ children, ...props }: BaseCardProps) {
   return (
     <StyledCardContentContainer {...props}>
       {children}

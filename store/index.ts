@@ -2,12 +2,14 @@ import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
 import { userApi } from "features/users/usersApi";
 import userTableSlice from "features/userTable/userTableSlice";
+import userDialogSlice from "features/userDialog/userDialogSlice";
 
 const makeStore = () =>
   configureStore({
     reducer: {
       [userApi.reducerPath]: userApi.reducer,
       userTable: userTableSlice,
+      userDialog: userDialogSlice,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(userApi.middleware),
