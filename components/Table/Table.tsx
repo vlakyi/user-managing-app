@@ -1,8 +1,9 @@
 import { useEffect, useMemo } from "react";
-import { TColumn, TDataWithId, TableProps } from "./Table.types";
+import { TDataWithId, TableProps } from "./Table.types";
 import {
   StyledTable,
   StyledTableCell,
+  StyledTableContainer,
   StyledTableHead,
   StyledTableHeaderCell,
   StyledTableRow,
@@ -27,32 +28,34 @@ export function Table<T extends TDataWithId>(props: TableProps<T>) {
   }, [data, sortOrder]);
 
   return (
-    <StyledTable>
-      <StyledTableHead>
-        <StyledTableRow>
-          {columns.map((column) => (
-            <StyledTableHeaderCell
-              key={column.id}
-              $isSortable={column.sortable}
-              onClick={() => toggleSort && toggleSort(column)}
-            >
-              {column.header}
-            </StyledTableHeaderCell>
-          ))}
-        </StyledTableRow>
-      </StyledTableHead>
-
-      <tbody>
-        {sortedData.map((row) => (
-          <StyledTableRow key={row.id}>
+    <StyledTableContainer>
+      <StyledTable>
+        <StyledTableHead>
+          <StyledTableRow>
             {columns.map((column) => (
-              <StyledTableCell key={`${row.id}_${column.id}`}>
-                {getColumnAccessor(row, column)}
-              </StyledTableCell>
+              <StyledTableHeaderCell
+                key={column.id}
+                $isSortable={column.sortable}
+                onClick={() => toggleSort && toggleSort(column)}
+              >
+                {column.header}
+              </StyledTableHeaderCell>
             ))}
           </StyledTableRow>
-        ))}
-      </tbody>
-    </StyledTable>
+        </StyledTableHead>
+
+        <tbody>
+          {sortedData.map((row) => (
+            <StyledTableRow key={row.id}>
+              {columns.map((column) => (
+                <StyledTableCell key={`${row.id}_${column.id}`}>
+                  {getColumnAccessor(row, column)}
+                </StyledTableCell>
+              ))}
+            </StyledTableRow>
+          ))}
+        </tbody>
+      </StyledTable>
+    </StyledTableContainer>
   );
 }

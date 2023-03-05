@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+export const StyledTableContainer = styled.div`
+  max-height: 60vh;
+  min-width: 80vh;
+  overflow-y: auto;
+`;
+
 export const StyledTable = styled.table`
   border: 1px solid black;
   width: 100%;
