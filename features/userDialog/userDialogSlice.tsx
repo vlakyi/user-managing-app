@@ -3,6 +3,8 @@ import { AppState } from "store";
 
 interface DialogInitialState {
   isOpen: boolean;
+  // could be part of the userSlice, then we will have a dialogSlice instead,
+  // but it was easier to colocate state in this case, normally I would split it
   selectedUserId?: string;
 }
 
