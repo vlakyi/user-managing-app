@@ -68,7 +68,7 @@ const EditUser: NextPage = () => {
   };
 
   return (
-    <Card minWidth="300px">
+    <Card>
       <Card.Header>
         <h1>Edit User</h1>
       </Card.Header>

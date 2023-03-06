@@ -48,8 +48,11 @@ export function Table<T extends TDataWithId>(props: TableProps<T>) {
           {sortedData.map((row) => (
             <StyledTableRow key={row.id}>
               {columns.map((column) => (
-                <StyledTableCell key={`${row.id}_${column.id}`}>
-                  {getColumnAccessor(row, column)}
+                <StyledTableCell
+                  data-label={column.header}
+                  key={`${row.id}_${column.id}`}
+                >
+                  <span>{getColumnAccessor(row, column)}</span>
                 </StyledTableCell>
               ))}
             </StyledTableRow>

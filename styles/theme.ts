@@ -34,6 +34,9 @@ const theme: DefaultTheme = {
     main: "hsl(0, 0%, 0%)",
     secondary: "hsl(0, 0%, 100%)",
   },
+  breakPoints: {
+    large: "1024px",
+  },
 };
 
 export { theme };

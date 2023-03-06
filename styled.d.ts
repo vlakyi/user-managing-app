@@ -7,6 +7,11 @@ declare module "styled-components" {
     secondary?: string;
     light?: string;
   }
+
+  interface BreakPoints {
+    large: string;
+  }
+
   export interface DefaultTheme {
     primary: ColorVariants;
     secondary: ColorVariants;
@@ -16,5 +21,6 @@ declare module "styled-components" {
     overlay: ColorVariants;
     background: ColorVariants;
     text: ColorVariants;
+    breakPoints: BreakPoints;
   }
 }

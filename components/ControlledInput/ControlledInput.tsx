@@ -15,8 +15,6 @@ export function ControlledInput<T>(props: ControlledInputProps<T>) {
   const { formState, register } = useFormContext();
   const message = (formState.errors[fieldName]?.message ?? "") as string;
 
-  console.log({ formState, fieldName, message });
-
   return (
     <StyledLabel>
       {label}

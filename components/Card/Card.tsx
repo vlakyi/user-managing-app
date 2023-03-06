@@ -4,27 +4,19 @@ import {
   StyledCardHeaderContainer,
 } from "./Card.styled";
 
-type BaseCardProps = React.HTMLAttributes<HTMLDivElement>;
+type CardProps = React.HTMLAttributes<HTMLDivElement>;
 
-interface CardProps extends BaseCardProps {
-  minWidth?: string;
+export function Card({ children, ...props }: CardProps) {
+  return <StyledCardContainer {...props}>{children}</StyledCardContainer>;
 }
 
-export function Card({ children, minWidth, ...props }: CardProps) {
-  return (
-    <StyledCardContainer $minWidth={minWidth} {...props}>
-      {children}
-    </StyledCardContainer>
-  );
-}
-
-export function CardHeader({ children, ...props }: BaseCardProps) {
+export function CardHeader({ children, ...props }: CardProps) {
   return (
     <StyledCardHeaderContainer {...props}>{children}</StyledCardHeaderContainer>
   );
 }
 
-export function CardContent({ children, ...props }: BaseCardProps) {
+export function CardContent({ children, ...props }: CardProps) {
   return (
     <StyledCardContentContainer {...props}>
       {children}

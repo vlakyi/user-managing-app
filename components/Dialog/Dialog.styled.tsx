@@ -10,4 +10,5 @@ export const StyledDialogOverlay = styled.article`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 1rem;
 `;

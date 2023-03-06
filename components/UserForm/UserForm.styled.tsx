@@ -5,6 +5,8 @@ export const StyledUserForm = styled.form`
   flex-direction: column;
   gap: 1rem;
   margin-bottom: 1rem;
+  width: 18rem;
+  max-width: 80vw;
 `;
 
 export const StyledLabel = styled.label`
