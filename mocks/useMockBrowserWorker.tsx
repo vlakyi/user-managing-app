@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+// Disable mocking to see SSR in action
 const isMockingEnabled = process.env.NODE_ENV === "development";
 
 export function useMockBrowserWorker() {
