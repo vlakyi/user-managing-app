@@ -10,18 +10,18 @@ export function validateProps({
 }: ValidatePropsProps) {
   const columnIds = columns.map((column) => column.id);
   const columnIdsSet = new Set(columnIds);
-  const isSortable = columns.some((column) => column.sortable);
+  const isSortable = columns.some((column) => column.isSortable);
 
   if (columnIds.length !== columnIdsSet.size) {
     throw new Error("Column ids must be unique");
   }
 
   if (isSortable && !toggleSort) {
-    throw new Error("toggleSort is required when columns are sortable");
+    throw new Error("toggleSort is required when columns are isSortable");
   }
 
   if (isSortable && !sortOrder) {
-    throw new Error("sortOrder is required when columns are sortable");
+    throw new Error("sortOrder is required when columns are isSortable");
   }
 }
 

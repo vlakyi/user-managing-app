@@ -9,7 +9,6 @@ interface ControlledInputProps<T>
   fieldName: Path<T>;
 }
 
-// can be implemented without generics, but it will be less universal
 export function ControlledInput<T>(props: ControlledInputProps<T>) {
   const { label, fieldName, ...rest } = props;
   const { formState, register } = useFormContext();

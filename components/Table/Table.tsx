@@ -32,15 +32,19 @@ export function Table<T extends TDataWithId>(props: TableProps<T>) {
       <StyledTable>
         <StyledTableHead>
           <StyledTableRow>
-            {columns.map((column) => (
-              <StyledTableHeaderCell
-                key={column.id}
-                $isSortable={column.sortable}
-                onClick={() => toggleSort && toggleSort(column)}
-              >
-                {column.header}
-              </StyledTableHeaderCell>
-            ))}
+            {columns.map((column) => {
+              const { id, header, isSortable } = column;
+
+              return (
+                <StyledTableHeaderCell
+                  key={id}
+                  $isSortable={isSortable}
+                  onClick={() => isSortable && toggleSort(column)}
+                >
+                  <span>{header}</span>
+                </StyledTableHeaderCell>
+              );
+            })}
           </StyledTableRow>
         </StyledTableHead>
 

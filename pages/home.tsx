@@ -14,8 +14,6 @@ import {
 
 import { User } from "mocks";
 
-// for home screen I chose to use server side rendering since it has less round trips to fetch data
-// alternatively I could have used client side rendering with displaying table skeleton and load data on client-side
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async () => {
     const { server } = await import("../mocks/server");
@@ -36,9 +34,7 @@ const Home: NextPage = () => {
 
   const dispatch = useDispatch();
   const toggleSort = (column: TColumn<User>) => {
-    if (!column.sortable) {
-      return;
-    }
+    if (!column.isSortable) return;
 
     dispatch(changeSortOrder(column.id as keyof User));
   };

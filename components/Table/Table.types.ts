@@ -4,7 +4,7 @@ interface TColumn<T> {
   id: string;
   header: React.ReactNode;
   accessor?: (row: T) => React.ReactNode;
-  sortable?: boolean;
+  isSortable?: boolean;
 }
 
 interface TDataWithId {

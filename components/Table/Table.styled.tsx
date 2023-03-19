@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-// here I chose desktop first approach, since there are more styling override required for mobile
 export const StyledTableContainer = styled.div`
   max-height: 60vh;
   width: 100%;

@@ -53,33 +53,39 @@ export function UserList({ users = [], sortOrder, toggleSort }: UserListProps) {
         {
           id: "id",
           header: "Id",
+          isSortable: true,
         },
         {
           id: "name",
           header: "Name",
+          isSortable: true,
         },
         {
           id: "username",
           header: "Username",
-          sortable: true,
+          isSortable: true,
         },
         {
           id: "email",
           header: "Email",
+          isSortable: true,
         },
         {
           id: "city",
           header: "City",
+          isSortable: true,
         },
         {
           id: "edit",
           header: "Edit",
           accessor: (user) => <EditUserButton userId={user.id} />,
+          isSortable: false,
         },
         {
           id: "delete",
           header: "Delete",
           accessor: (user) => <DeleteUserButton userId={user.id} />,
+          isSortable: false,
         },
       ] satisfies TColumn<User>[],
     []
