@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
@@ -31,40 +30,26 @@ export const getServerSideProps = wrapper.getServerSideProps(
 );
 
 const EditUser: NextPage = () => {
-  const [editUser, { isError, error, data }] = useEditUserMutation();
+  const [editUser] = useEditUserMutation();
   const { push, query } = useRouter();
 
   const userId = query.userId as string;
 
-  const {
-    data: userData,
-    error: fetchUserError,
-    isError: isFetchUserError,
-  } = useGetUserByIdQuery(userId);
+  const { data } = useGetUserByIdQuery(userId);
 
-  useEffect(() => {
-    if (isFetchUserError && fetchUserError) {
-      toast("Failed to fetch user details", { type: "error" });
-    }
-  }, [fetchUserError, isFetchUserError]);
+  const handleSubmit = async (values: UserInput) => {
+    try {
+      const result = await editUser({ user: values, id: userId }).unwrap();
 
-  useEffect(() => {
-    if (isError && error) {
+      if (result?.user) {
+        push("/home");
+        toast(`User: ${result.user.username} edited successfully`, {
+          type: "success",
+        });
+      }
+    } catch (err) {
       toast("Failed to edit a user", { type: "error" });
     }
-  }, [isError, error]);
-
-  useEffect(() => {
-    if (data?.user) {
-      push("/home");
-      toast(`User: ${data.user.username} edited successfully`, {
-        type: "success",
-      });
-    }
-  }, [data, push]);
-
-  const handleSubmit = (values: UserInput) => {
-    editUser({ user: values, id: userId });
   };
 
   return (
@@ -74,7 +59,7 @@ const EditUser: NextPage = () => {
       </Card.Header>
 
       <Card.Content>
-        <UserForm defaultValues={userData?.user} onSubmit={handleSubmit} />
+        <UserForm defaultValues={data?.user} onSubmit={handleSubmit} />
       </Card.Content>
     </Card>
   );

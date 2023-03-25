@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { TColumn, Table } from "components/Table";
@@ -24,28 +24,24 @@ interface UserListProps {
 export function UserList({ users = [], sortOrder, toggleSort }: UserListProps) {
   const { push } = useRouter();
   const dispatch = useAppDispatch();
-  const [deleteUser, { isError, error, data }] = useDeleteUserMutation();
+  const [deleteUser] = useDeleteUserMutation();
 
-  const onDelete = (userId?: string) => {
+  const onDelete = async (userId?: string) => {
     if (!userId) return;
 
-    deleteUser(userId);
-    dispatch(closeDialog());
-  };
-
-  useEffect(() => {
-    if (isError && error) {
+    try {
+      const result = await deleteUser(userId).unwrap();
+      if (result.user) {
+        toast(`User: ${result.user.username} deleted successfully`, {
+          type: "success",
+        });
+      }
+    } catch (rejectedValueOrSerializedError) {
       toast("Failed to delete a user", { type: "error" });
     }
-  }, [error, isError]);
 
-  useEffect(() => {
-    if (data?.user) {
-      toast(`User: ${data.user.username} deleted successfully`, {
-        type: "success",
-      });
-    }
-  }, [data]);
+    dispatch(closeDialog());
+  };
 
   const columns: TColumn<User>[] = useMemo(
     () =>
